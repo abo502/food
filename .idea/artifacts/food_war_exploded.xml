@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="stcok:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/stcok_war_exploded</output-path>
+  <artifact type="exploded-war" name="food:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/food_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="stcok" />
+          <element id="module-output" name="food" />
         </element>
         <element id="directory" name="lib">
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/jsp-api.jar" />
@@ -15,7 +15,7 @@
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-8.0.19.jar" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="stcok/web/Web" />
+      <element id="javaee-facet-resources" facet="food/web/Web" />
     </root>
   </artifact>
 </component>

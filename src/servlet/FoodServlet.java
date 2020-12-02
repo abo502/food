@@ -1,7 +1,7 @@
-package controller;
+package servlet;
 
 import DBUtil.Db;
-import entity.Clothes;
+import entity.Food;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,43 +15,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClothesServlet extends HttpServlet {
+public class FoodServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("gbk");
-        List<Clothes> lists = new ArrayList<>();
+        List<Food> lists = new ArrayList<>();
         String num = req.getParameter("num");
         ResultSet resultSet;
         PreparedStatement preparedStatement;
         try {
             if (num == null) {
-                String sql = "select * from stock";
+                String sql = "select * from food";
                  preparedStatement = Db.createPreparedStatement(sql);
                 if (preparedStatement != null) {
                     resultSet = preparedStatement.executeQuery();
                     while (resultSet.next()) {
-                        Clothes clothes = new Clothes();
-                        clothes.setId(resultSet.getInt("id"));
-                        clothes.setBrand(resultSet.getString("brand"));
-                        clothes.setNumber(Integer.valueOf(resultSet.getString("num")));
-                        clothes.setPrice(Integer.valueOf(resultSet.getString("price")));
-                        lists.add(clothes);
+                        Food food = new Food();
+                        food.setId(resultSet.getInt("id"));
+                        food.setName(resultSet.getString("name"));
+                        food.setNumber(Integer.valueOf(resultSet.getString("num")));
+                        food.setPrice(Integer.valueOf(resultSet.getString("price")));
+                        lists.add(food);
                     }
                 }
             } else {
-                String sql = "select * from stock where num > ?";
+                String sql = "select * from food where num > ?";
                 preparedStatement = Db.createPreparedStatement(sql);
                 if (preparedStatement != null) {
                     preparedStatement.setObject(1,num);
                     resultSet = preparedStatement.executeQuery();
                     while (resultSet.next()) {
-                        Clothes clothes = new Clothes();
-                        clothes.setId(resultSet.getInt("id"));
-                        clothes.setBrand(resultSet.getString("brand"));
-                        clothes.setNumber(Integer.valueOf(resultSet.getString("num")));
-                        clothes.setPrice(Integer.valueOf(resultSet.getString("price")));
-                        lists.add(clothes);
+                        Food food = new Food();
+                        food.setId(resultSet.getInt("id"));
+                        food.setName(resultSet.getString("name"));
+                        food.setNumber(Integer.valueOf(resultSet.getString("num")));
+                        food.setPrice(Integer.valueOf(resultSet.getString("price")));
+                        lists.add(food);
                     }
                 }
             }
@@ -60,8 +60,8 @@ public class ClothesServlet extends HttpServlet {
             e.printStackTrace();
         }
         HttpSession session = req.getSession();
-        session.setAttribute("clothes", lists);
-        resp.sendRedirect("/stock.jsp");
+        session.setAttribute("foods", lists);
+        resp.sendRedirect("/food.jsp");
     }
 
     @Override
